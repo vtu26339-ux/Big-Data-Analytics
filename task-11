@@ -1,0 +1,15 @@
+import tweepy 
+import json 
+ 
+consumer_key = 'KbKxl06BkeqAcwNhJnBMN5s5M' 
+consumer_secret = 'LaVFLQhzzy57mVDo9dbT60QOXnN6Ajm09Q6PAmSgPGoozZqhM9' access_token = '1709726896194244609-w4KYxcGTyA4GHjlO7kJHzQlCWiVvSm' access_token_secret = 'G8uyaHaIXoDUmFzVW3Ao6sAWRZ328Y2B6RraAeEU8p4e3' 
+ 
+auth = tweepy.OAuth2BearerHandler(consumer_key, consumer_secret) 
+auth.set_access_token(access_token, access_token_secret) api = tweepy.API(auth, wait_on_rate_limit=True) search_query = 'covid 19' num_tweets = 1000   
+output_file = 'covid19_tweets.json' tweets = [] for tweet in tweepy.Cursor(api.search, q=search_query, lang='en').items(num_tweets): 
+    tweets.append(tweet._json) 
+ 
+with open(output_file, 'w', encoding='utf-8') as file: 
+    json.dump(tweets, file, ensure_ascii=False, indent=4) 
+ 
+print(f'{len(tweets)} tweets collected and saved to {output_file}') 
