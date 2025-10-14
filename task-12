@@ -1,0 +1,48 @@
+import pymongo 
+mongo_uri = "mongodb://localhost:27017/"   database_name = "Country"   collection_name = "Tweets"   
+client = pymongo.MongoClient(mongo_uri) 
+db = client[database_name] 
+collection = db[collection_name] 
+ 
+pipeline = [ 
+    { 
+        "$group": { 
+            "_id": "$country_code", 
+            "total_favorite_count": {"$sum": "$favorite_count"},             "total_retweet_count": {"$sum": "$retweet_count"} 
+        } 
+    } 
+] 
+ 
+result = list(collection.aggregate(pipeline)) 
+ 
+if result: 
+    total_favorite_count = result[0]["total_favorite_count"]     total_retweet_count = result[1]["total_retweet_count"]     print(f"Total favorite_count: {total_favorite_count}")     print(f"Total_retweet_count: {total_retweet_count}") else: 
+print("No tweets found in the collection.") 
+ 
+# Close the MongoDB connection client.close() 
+
+
+
+
+
+
+
+# task-12(b)
+
+
+
+import nltk 
+from nltk.stem import WordNetLemmatizer from nltk.stem import PorterStemmer from nltk.corpus import stopwords 
+ 
+nltk.download('punkt') nltk.download('wordnet') 
+nltk.download('stopwords') 
+ 
+tweet = "The quick brown foxes are jumping over the lazy dogs' bones." 
+ 
+words = nltk.word_tokenize(tweet) lemmatizer = WordNetLemmatizer() stemmer = PorterStemmer() 
+lemmatized_words = [lemmatizer.lemmatize(word) for word in words] stemmed_words = [stemmer.stem(word) for word in words] words = nltk.word_tokenize(tweet) 
+ 
+stop_words = set(stopwords.words('english')) 
+filtered_words = [word for word in words if word.lower() not in stop_words] filtered_text = ' '.join(filtered_words) print("Original words:", words) 
+print("Lemmatized words:", lemmatized_words) 
+print("Stemmed words:", stemmed_words) print("Tweet without stop words:", filtered_text) 
