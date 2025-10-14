@@ -1,0 +1,36 @@
+Create Keyspace: 
+A keyspace is like RDBMS database which contains column families, indexes, user defined types, data center awareness, strategy used in keyspace, replication factor, etc. 
+CREATE KEYSPACE <identifier> WITH <properties> 
+Or 
+Create keyspace KeyspaceName with replicaton={'class':strategy name,    'replication_factor': No of replications on different nodes}   Alter Keyspace: 
+ALTER KEYSPACE <identifier> WITH <properties>    
+Or 
+ALTER KEYSPACE "KeySpace Name"   
+WITH replication = {'class': 'Strategy name', 'replication_factor' : 'No.Of  replicas'};    Drop Keyspace: 
+DROP  keyspace KeyspaceName ;   Create Table Operation: 
+Syntax of Create Operation- 
+CREATE (TABLE | COLUMNFAMILY) <tablename>   
+('<column-definition>' , '<column-definition>')   
+(WITH <option> AND <option>)    
+ 
+CRUD Operatons: 
+CREATE KEYSPACE test_cassandra WITH replication = {'class':'SimpleStrategy' , 'replication_factor' : 
+1}; 
+Use test_cassandra ; 
+ 
+CREATE TABLE student(      student_id int PRIMARY KEY,      student_name text,   
+   student_city text,      student_fees varint,      student_phone varint   
+   );   
+Create Data: 
+INSERT INTO student (student_id, student_fees, student_name)    
+VALUES(1,5000, 'Ajeet');   
+INSERT INTO student (student_id, student_fees, student_name)    
+VALUES(2,3000, 'Kanchan');   
+INSERT INTO student (student_id, student_fees, student_name)    
+VALUES(3, 2000, 'Shivani');   
+READ Data 
+SELECT  * FROM student; 
+SELECT * FROM student WHERE student_id=2;   Update Data: 
+UPDATE student SET student_fees=10000,student_name='Rahul'   
+WHERE student_id=2;   DELETE Data: 
+DELETE student_fees FROM student WHERE student_id=3; Output: 
