@@ -1,3 +1,5 @@
+Date : 06.08.2025
+
 SELECT
     b.brand_name AS brand,
     c.category_name AS category,
@@ -140,5 +142,16 @@ PIVOT(
         [Road Bikes])
 ) AS pivot_table;
 
+output : 
 
+brand	category	sales
+Nike	Shoes	1000
+Nike	Shirts	500
+Adidas	Shoes	800
+Adidas	Shirts	400
+Nike	NULL	1500
+Adidas	NULL	1200
+NULL	Shoes	1800
+NULL	Shirts	900
+NULL	NULL	2700
 
