@@ -1,4 +1,4 @@
-Date : 
+Date : 30.07.2025
 
 CREATE SCHEMA production;
 go
@@ -46,3 +46,4 @@ FROM
 LEFT JOIN sales.order_items o ON o.product_id = p.product_id
 ORDER BY
     order_id;
+output : 
