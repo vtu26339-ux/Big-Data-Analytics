@@ -1,3 +1,6 @@
+Date : 17.09.2025
+
+Program : 
 Hive Basic Commands: 
 Show Databases: SHOW DATABASES; 
 Use Database: 
@@ -16,3 +19,13 @@ LOAD DATA LOCAL INPATH '/path/to/datafile.csv' OVERWRITE INTO TABLE my_table; Qu
 SELECT * FROM my_table WHERE age > 25; Insert Data into a Table: 
 INSERT INTO TABLE my_table VALUES (1, 'John', 30); Describe Table: 
 DROP TABLE my_table; 
+
+
+output :
+
+id    name    salary 
+1     lisa    30000
+2     umesh   90000
+3     lasya   60000
+4     sasi    80000
+5     usha    50000    
