@@ -47,3 +47,10 @@ LEFT JOIN sales.order_items o ON o.product_id = p.product_id
 ORDER BY
     order_id;
 output : 
+first_name ,  last_name 
+Fabiola  , Jackson
+mireya   , Copeland
+Genna    , Serrano
+Virgie   , Wiggins
+Jannette , David
+Kali     , Vargas
