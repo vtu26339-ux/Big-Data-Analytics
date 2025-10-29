@@ -1,3 +1,6 @@
+Date : 24.09.2025
+
+Program : 
 For Java: 
 JAVA_HOME=C:\Program Files\Java\jdk-1.8 
 Path = C:\Program Files\Java\jdk-1.8\bin For Hadoop: 
@@ -58,4 +61,55 @@ FO = JOIN table1 BY name FULL OUTER, table2 BY name; dump FO;
  
 Store Operator: grouped_data = GROUP data BY age; 
 result = FOREACH grouped_data GENERATE group AS age, COUNT(data) AS count; STORE result INTO 'output'; 
+
+output : 
+Pig Latin scripts: 
+Input.txt 
+Rajiv,42 siddarth,45 Rajesh,40 
+Preethi,23 
+Trupthi,34 
+Archana,21 
+Robin,22 
+BOB,23 
+Maya,23 
+Sara,25 
+David,23 
+Maggy,22 
+ 
+Addressfile.txt 
+Rajiv,Chennai 
+Rajesh,Delhi 
+Trupthi,Hyderabad 
+Robin,Pune 
+Maya,Hyderabad 
+Anderson,Chennai 
+Antolina,Chennai 
+ 
+ 
+Load Data: 
+data = LOAD './input.txt' USING PigStorage(',') AS (name:chararray, age:int); 
+ 
+Sort Operator: sortbyage = ORDER data BY age ASC|DESC; dump sortbyage; 
+ 
+Group Operator: grouped_data = GROUP data BY age; dump grouped_data
+Filter Operator: filterbyage = FILTER data BY (age>40); dump filterbyage; 
+ 
+ 
+Inner Join Operator: 
+table1 = LOAD './input.txt' USING PigStorage(',') AS (name:chararray, age:int); 
+table2 = LOAD './addressfile.txt' USING PigStorage(',') AS (name:chararray, address:chararray); 
+ 
+joinbyname = JOIN table1 BY name, table2 BY name; 
+ 
+OuterJoin Operator; 
+LO = JOIN table1 BY name LEFT OUTER, table2 BY name; dump LO; 
+ 
+RO = JOIN table1 BY name RIGHT, table2 BY name; dump RO; 
+ 
+FO = JOIN table1 BY name FULL OUTER, table2 BY name; dump FO; 
+ 
+Store Operator: grouped_data = GROUP data BY age; 
+result = FOREACH grouped_data GENERATE group AS age, COUNT(data) AS count; STORE result INTO 'output'; 
+ 
+
  
