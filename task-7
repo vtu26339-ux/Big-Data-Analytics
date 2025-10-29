@@ -1,3 +1,5 @@
+Date : 17.09.2025
+
 1.	Install Java Development Kit (JDK) version 8 or higher. 
 2.	Install ZooKeeper: Kafka relies on ZooKeeper for distributed coordination. Kafka comes with an inbuilt Zookeeper 
 3.	Visit the Apache Kafka website (https://kafka.apache.org/downloads) and download the latest version Kafka for Windows. 
@@ -17,3 +19,14 @@ bin\windows\kafka-console-producer.bat --bootstrap-server localhost:9092 --topic
 11.	Consume the messages and submit to test topic. 
 bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test --from-beginning Hello 
 Kafka 
+
+output : 
+created topic test 
+E: \ ...\ --path 
+test
+>Hello
+>kafka
+>Terminate batch job (Y?N)? Y
+Hello
+Kafka
+
