@@ -1,3 +1,5 @@
+Date : 15.10.2025
+
 Create Keyspace: 
 A keyspace is like RDBMS database which contains column families, indexes, user defined types, data center awareness, strategy used in keyspace, replication factor, etc. 
 CREATE KEYSPACE <identifier> WITH <properties> 
@@ -33,4 +35,11 @@ SELECT  * FROM student;
 SELECT * FROM student WHERE student_id=2;   Update Data: 
 UPDATE student SET student_fees=10000,student_name='Rahul'   
 WHERE student_id=2;   DELETE Data: 
-DELETE student_fees FROM student WHERE student_id=3; Output: 
+DELETE student_fees FROM student WHERE student_id=3; 
+
+Output: 
+
+stude_id  ,  stu_city ,  fees,  name,  phone 
+1            null         5000   ajeet null
+2            null         3000   kanchan null
+3            null         2000   shivani  null
