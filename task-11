@@ -47,3 +47,24 @@ SAMPLE OUTPUT: 'covid19_tweets.json'
     "State_Notes": "" 
   }] 
  
+Sample output :
+country_code 	latitude 	longitude 	country_name 	place_type 	favorite_count 	retweet_count 
+AE 	23.424076 	53.847818 	United Arab Emirates 	Residential 	7 	4 
+AE 	23.424076 	53.847818 	United Arab Emirates 	Commercial 	5 	2 
+AR 	-38.416097 	-63.616672 	Argentina 	Educational 	4 	6 
+AR 	-38.416097 	-63.616672 	Argentina 	Cultural 	5 	5 
+IN 	20.593684 	78.96288 	India 	Religious 	80 	3 
+IN 	20.593684 	78.96288 	India 	Historical 	100 	6 
+TH 	15.870032 	100.992541 	Thailand 	Shopping 	2 	5 
+IN 	20.593684 	78.96288 	India 	Sports 	55 	3 
+AO 	-11.202692 	17.873887 	Angola 	Residential 	2 	6 
+AQ 	-75.250973 	-0.071389 	Antarctica 	Commercial 	4 	4 
+AR 	-38.416097 	-63.616672 	Argentina 	Educational 	5 	9 
+AS 	-14.270972 	-170.132217 	American Samoa 	Cultural 	3 	6 
+BD 	23.684994 	90.356331 	Bangladesh 	Religious 	0 	4 
+AU 	-25.274398 	133.775136 	Australia 	Historical 	8 	4 
+AW 	12.52111 	-69.968338 	Aruba 	Shopping 	2 	8 
+AZ 	40.143105 	47.576927 	Azerbaijan 	Sports 	4 	5 
+EG 	26.820553 	30.802498 	Egypt 	Tourist 	2 	2 
+IN 	20.593684 	78.96288 	India 	Tourist 	8 	5 
+BD 	23.684994 	90.356331 	Bangladesh 	Religious 	9 	2 
