@@ -1,3 +1,5 @@
+Date : 15.08.2025
+
 import findspark findspark.init() 
 from pyspark.sql import SparkSession spark = SparkSession.builder\                     .master("local")\ 
                     .appName('Firstprogram')\ 
@@ -19,3 +21,16 @@ Of: 1
 Tamil: 1 
 Nadu: 1 southernmost: 1 Indian: 1 state.: 1 
  
+output : 
+
+chennai : 1
+formerly : 1
+known :1
+madras : 1
+is : 1
+capital : 1
+is : 1
+city : 1
+of :1
+tamil : 1
+nadu : 1
