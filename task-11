@@ -1,3 +1,6 @@
+Date : 08.10.2025
+
+Program : 
 import tweepy 
 import json 
  
@@ -13,3 +16,34 @@ with open(output_file, 'w', encoding='utf-8') as file:
     json.dump(tweets, file, ensure_ascii=False, indent=4) 
  
 print(f'{len(tweets)} tweets collected and saved to {output_file}') 
+
+SAMPLE OUTPUT: 'covid19_tweets.json' 
+[{ 
+    "State": "Andaman and Nicobar Islands", 
+    "Confirmed": 7651, 
+    "Recovered": 7518, 
+    "Deaths": 129, 
+    "Active": 4, 
+    "Last_Updated_Time": "13/08/2021 23:27:22", 
+    "Migrated_Other": 0, 
+    "State_code": "AN", 
+    "Delta_Confirmed": 0, 
+    "Delta_Recovered": 0, 
+    "Delta_Deaths": 0, 
+    "State_Notes": "" 
+  }, 
+  { 
+    "State": "Andhra Pradesh", 
+    "Confirmed": 2066450, 
+    "Recovered": 2047722, 
+    "Deaths": 14373, 
+    "Active": 4355, 
+    "Last_Updated_Time": "13/08/2021 23:27:22", 
+    "Migrated_Other": 0, 
+    "State_code": "AP", 
+    "Delta_Confirmed": 0, 
+    "Delta_Recovered": 0, 
+    "Delta_Deaths": 0, 
+    "State_Notes": "" 
+  }] 
+ 
