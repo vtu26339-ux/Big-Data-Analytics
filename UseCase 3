@@ -1,0 +1,80 @@
+Date : 29.10.2025
+
+# spark_stream_write.py
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import from_json, col, to_timestamp, date_format
+from pyspark.sql.types import StructType, StringType, DoubleType
+
+spark = SparkSession.builder \
+    .appName("TrafficStreamToParquet") \
+    .getOrCreate()
+
+schema = StructType() \
+    .add("event_id", StringType()) \
+    .add("location_id", StringType()) \
+    .add("lat", StringType()) \
+    .add("lon", StringType()) \
+    .add("timestamp_iso", StringType()) \
+    .add("speed_kmph", StringType()) \
+    .add("source", StringType())
+
+df_raw = spark.readStream \
+    .format("kafka") \
+    .option("kafka.bootstrap.servers", "localhost:9092") \
+    .option("subscribe", "traffic_events") \
+    .load()
+
+df = df_raw.selectExpr("CAST(value AS STRING) as json_str") \
+    .select(from_json(col("json_str"), schema).alias("j")) \
+    .select(
+        col("j.event_id"),
+        col("j.location_id"),
+        col("j.lat").cast("double").alias("lat"),
+        col("j.lon").cast("double").alias("lon"),
+        to_timestamp(col("j.timestamp_iso")).alias("event_ts"),
+        col("j.speed_kmph").cast("double").alias("speed_kmph"),
+        col("j.source")
+    ) \
+    .withColumn("date", date_format(col("event_ts"), "yyyy-MM-dd")) \
+    .withColumn("hour", date_format(col("event_ts"), "HH"))
+
+query = df.writeStream \
+    .format("parquet") \
+    .option("path", "/data/traffic/parquet/") \
+    .option("checkpointLocation", "/data/traffic/checkpoint/") \
+    .partitionBy("date", "hour") \
+    .outputMode("append") \
+    .start()
+
+query.awaitTermination()
+
+-- External table reading parquet files written by Spark
+CREATE EXTERNAL TABLE IF NOT EXISTS traffic.events_raw (
+  event_id STRING,
+  location_id STRING,
+  lat DOUBLE,
+  lon DOUBLE,
+  event_ts TIMESTAMP,
+  speed_kmph DOUBLE,
+  source STRING
+)
+PARTITIONED BY (date STRING, hour STRING)
+STORED AS PARQUET
+LOCATION '/data/traffic/parquet/';
+
+Sample Dataset :
+event_id,location_id,lat,lon,timestamp_iso,speed_kmph,source
+e1,L1,12.9716,77.5946,2025-10-31T10:00:05,35,google_maps
+e2,L1,12.9716,77.5946,2025-10-31T10:00:20,30,google_maps
+e3,L2,12.9352,77.6245,2025-10-31T10:00:12,20,google_maps
+e4,L1,12.9716,77.5946,2025-10-31T10:01:07,25,google_maps
+e5,L2,12.9352,77.6245,2025-10-31T10:01:30,22,google_maps
+e6,L3,12.9081,77.6476,2025-10-31T10:00:50,50,google_maps
+
+output : 
+location_id	minute_ts	avg_speed	event_count
+L1	2025-10-31 10:00	32.50	2
+L2	2025-10-31 10:00	20.00	1
+L3	2025-10-31 10:00	50.00	1
+L1	2025-10-31 10:01	25.00	1
+L2	2025-10-31 10:01	22.00	1
