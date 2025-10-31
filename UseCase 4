@@ -1,0 +1,22 @@
+Date : 29.102025
+
+from pyspark.sql import SparkSession
+spark = SparkSession.builder.appName("DataPipeline").getOrCreate()
+source_data = spark.read.csv("source_data.csv", header=True, inferSchema=True)
+cleaned_data = source_data.filter(source_data["column_name"] > 10)
+cleaned_data.write.mode("overwrite").parquet("hdfs:///user/hive/warehouse/cleaned_data")
+spark.sql("""
+    CREATE EXTERNAL TABLE cleaned_data (
+        col1 STRING,
+        col2 INT
+    )
+    ROW FORMAT SERDE 'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe'
+    STORED AS INPUTFORMAT 'org.apache.hadoop.mapred.SequenceFileInputFormat'
+    OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat'
+    LOCATION 'hdfs:///user/hive/warehouse/cleaned_data'
+"")
+
+# You can now use Hive to run SQL queries on the data in the "cleaned_data" external table.
+spark.stop()
+
+output : 
