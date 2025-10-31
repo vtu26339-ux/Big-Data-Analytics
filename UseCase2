@@ -18,7 +18,7 @@ class WeatherAnalysis(MRJob):
 if __name__ == '__main__':
     WeatherAnalysis.run()
 OUTPUT:
- 
 
+<img width="765" height="461" alt="image" src="https://github.com/user-attachments/assets/3da8dafd-7935-487d-bc78-1569b2aed182" />
 RESULT:
 Thus, Implemented Mapreducer Program to perform data analysis on weather dataset successfully.
